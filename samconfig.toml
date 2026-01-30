@@ -1,0 +1,22 @@
+version = 0.1
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "collie-smart-tv-webpage-stage"
+s3_bucket = "collie-smart-home-stage-deployments"
+s3_prefix = "collie-smart-tv-webpage"
+region = "us-east-1"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM"
+parameter_overrides = "AppDomainName=\"stage.apptv.com.ar\""
+
+[prod]
+[prod.deploy]
+[prod.deploy.parameters]
+stack_name = "collie-smart-tv-webpage-prod"
+s3_bucket = "collie-smart-home-prod-deployments"
+s3_prefix = "collie-smart-tv-webpage"
+region = "us-east-1"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM"
+parameter_overrides = "AppDomainName=\"www.apptv.com.ar\""
