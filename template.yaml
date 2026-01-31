@@ -17,6 +17,8 @@ Parameters:
 Conditions:
   HasCustomDomain: !Not [!Equals [!Ref AppDomainName, ""]]
   HasCertificate: !Not [!Equals [!Ref CertificateArn, ""]]
+  # Only add aliases if we have BOTH a domain and a certificate
+  EnableCustomDomain: !And [!Condition HasCustomDomain, !Condition HasCertificate]
 
 Resources:
   # Bucket S3 para el contenido estático
@@ -70,7 +72,7 @@ Resources:
         # Si tenemos dominio y certificado, configurar Aliases y ViewerCertificate
         Aliases: 
           Fn::If: 
-            - HasCustomDomain
+            - EnableCustomDomain
             - [!Ref AppDomainName]
             - !Ref "AWS::NoValue"
             
